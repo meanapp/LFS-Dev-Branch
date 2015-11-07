@@ -4,7 +4,7 @@ Hello DEV Team,
 
 Below are steps you need to follow for checking out the project and get yourself up & running in your local.
 
-1) git clonehttps://github.com/meanapp/LFS-Dev-Branch.git
+1) git clone https://github.com/meanapp/LFS-Dev-Branch.git
 
 2) After the project is cloned to your local, switch directory to client as 
 
