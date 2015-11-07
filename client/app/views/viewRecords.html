@@ -1,0 +1,36 @@
+<div class = "container">
+	<h3>My Leave History</h3><br>
+	<div ng-controller = "ViewRecordsController">
+		<div class="panel panel-default" style = "width: 960px;" ng-repeat = "record in records"> 
+          <div class="panel-body">
+             <table class = "table borderless">
+                <tr>
+                  <td><b>Name</b></td>
+                  <td>{{record.userId[0].firstName + " " + record.userId[0].lastName}}</td>
+
+                  <td><b>Approver</b></td>
+                  <td>{{record.projectId[0].ProjectManager}}</td>
+                </tr>
+                <tr>
+                  <td><b>Status</b></td>
+                  <td>{{record.status}}</td>
+
+                  <td><b>Reason</b></td>
+                  <td>{{record.reason}}</td>
+                </tr>
+                <tr>
+                  <td><b>From</b></td>
+                  <td>{{record.leaveStartDate}}</td>
+                  <td><b>To</b></td>
+                  <td>{{record.leaveEndDate}}</td>
+                </tr>
+             </table>
+             <div>
+               <a class = "btn btn-primary" href="#/editLeaveRecord/{{record._id}}">Edit</a>
+               <a ng-if = "record.status !== 'Cancelled'" class = "btn btn-danger" style = "margin-left: 10px;" ng-click="cancel(record._id)">Cancel leave</a>
+             </div>
+          </div>
+        </div>
+	</div>
+</div>
+

@@ -1,0 +1,30 @@
+<div class = "container" ng-controller="ApproveRequestController">
+	<h3>Pending Leave Requests</h3>
+	<br>
+	<table class="table ng-table-responsive" ng-table="tableParams">		
+		<tr ng-repeat = "leave in $data">
+			<td data-title = "'Name'" sortable="'Name'">
+				{{leave.userId[0].firstName + " " + leave.userId[0].lastName}}
+			</td>
+			<td data-title = "'StartdDate'">
+				{{leave.leaveStartDate}}
+			</td>
+			<td data-title = "'End Date'">
+				{{leave.leaveEndDate}}
+			</td>
+			<td data-title = "'Reason'">
+				{{leave.reason}}
+			</td>
+			<td data-title = "'Status'">
+				{{leave.status}}
+			</td>
+			<td>
+				<div style= "width: 10px"></div>
+			</td>
+			<td data-title = "'Action'">
+				<a class = "btn btn-success" ng-click = "requestAction(leave._id, 'Approve')">Approve</a>
+				<a class = "btn btn-danger" style = "margin-left: 10px" ng-click = "requestAction(leave._id, 'Reject')">Reject</a>			
+			</td>
+		</tr>
+	</table>
+</div>

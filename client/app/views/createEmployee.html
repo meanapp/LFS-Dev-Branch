@@ -1,0 +1,50 @@
+<div class = "container">
+<h1> Registration Page </h1>
+	<div ng-app="register" ng-controller="CreateEmployeeController">
+		<div class="container">
+			<div class="row">  
+					<div class="col-sm-6">
+						<form name="registerForm" ng-submit="submitForm()" novalidate>
+							<!-- register FirstName -->
+							<div class="form-group" ng-class="{ 'has-error' : registerForm.firstName.$invalid && !registerForm.firstName.$pristine }">
+								<label>First Name</label>
+								<input type="text" name="firstName" class="form-control" ng-model="user.firstName" required>
+								<p ng-show="registerForm.firstName.$invalid && !registerForm.firstName.$pristine" class="help-block">Enter a valid First Name.</p>
+							</div>
+							
+							<!-- register Last Name -->
+							<div class="form-group" ng-class="{ 'has-error' : registerForm.lastName.$invalid && !registerForm.lastName.$pristine }">
+								<label>Last Name</label>
+								<input type="text" name="lastName" class="form-control" ng-model="user.lastName" required>
+								<p ng-show="registerForm.lastName.$invalid && !registerForm.lastName.$pristine" class="help-block">Enter a valid Last Name.</p>
+							</div>
+
+							<div class="form-group" ng-class="{ 'has-error' : registerForm.emailAddress.$invalid && !registerForm.emailAddress.$pristine }">
+								<label>Email Address</label>
+								<input type="text" name="emailAddress" class="form-control" ng-model="user.emailAddress" required>
+								<p ng-show="registerForm.emailAddress.$invalid && !registerForm.emailAddress.$pristine" class="help-block">Enter a valid Email Addres.</p>
+							</div>
+
+							<label>Project Name</label>
+							<br>
+							<select ng-model="user.projectId" placeholder="Project Name" class="form-control">
+								<option ng-repeat = "project in projects" value = "{{project._id}}">{{project.ProjectName}}</option>
+							</select> 
+							<br>
+
+							<div>
+								<label ng-repeat = "register in registerType" for = "{{register}}">
+									{{register}}
+									<input type = "radio" style="margin-right: 30px;" ng-model = "user.register" ng-value="register" id = "{{register}}" name = "user.registerType">
+								</label>			
+							</div>
+							<br>
+
+							<button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">Submit</button>							
+						</form>
+					</div>	
+				</div>
+			</div>
+		</div>
+</div>
+

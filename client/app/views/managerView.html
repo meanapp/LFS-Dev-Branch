@@ -1,0 +1,35 @@
+<div class="container">
+    <h2 class="text-center">{{ calendarTitle }}</h2>
+    <div class = "calendarContainer">
+        <button
+            class="btn btn-primary"
+            mwl-date-modifier
+            date="calendarDay"
+            decrement="calendarView">
+            Previous
+        </button>
+
+        <button
+            class="btn btn-default"
+            mwl-date-modifier
+            date="calendarDay"
+            set-to-today>
+            Today
+        </button>
+
+        <button
+            class="btn btn-primary"
+            mwl-date-modifier
+            date="calendarDay"
+            increment="calendarView">
+            Next
+        </button>
+        <mwl-calendar
+            view="calendarView"
+            current-day="calendarDay"
+            events="events"
+            view-title="calendarTitle"
+            auto-open="true">
+        </mwl-calendar>
+    </div>
+</div>

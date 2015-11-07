@@ -1,0 +1,32 @@
+<div class="container">
+    <div ng-app="login" ng-controller="MainController as login">
+      <div class="container">
+        <div class="row">  
+          <div class="col-sm-6">
+            <form name="loginForm" ng-submit = "login.doLogin()" novalidate>
+
+              <!-- Login EMAIL -->
+              <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" ng-model="login.loginData.email" required>
+                <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+              </div>
+              
+              <!-- Password -->
+              <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" ng-model="login.loginData.password"  required>
+                <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Enter a valid password.</p>
+                <!-- <p ng-show="loginForm.password.$error.minlength" class="help-block">Please enter minimum 8 characters</p> -->
+              </div>
+              
+              <button type="submit" class="btn btn-primary submitButton" ng-disabled="loginForm.$invalid">Submit</button>
+              <div class="forgotPwd">
+                <a href="#/forgotPassword" style = "margin-left: 30px;">Forgot Password ?</a>
+              </div>
+            </form>
+          </div>  
+        </div>
+      </div>
+    </div>
+</div>

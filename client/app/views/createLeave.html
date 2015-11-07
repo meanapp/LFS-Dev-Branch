@@ -1,0 +1,60 @@
+<div class="container container-fluid" ng-controller="CreateLeaveController as create">
+	<h2>Apply for leave</h2> <br>
+	<form name="form" class="form-inline" ng-submit="submitForm(form.$valid)" novalidate>
+    	<div class="form-group">
+     		<table class = "table borderless" style = "width: 400px;">
+     			<tr>
+     				<td><b>Name</b></td>
+     				<td>{{create.user.firstName + " " + create.user.lastName}}</td>
+     			</tr>
+     			<tr>
+     				<td><b>Project Name</b></td>
+     				<td>{{create.user.projectId[0].ProjectName}}</td>
+     			</tr>
+     			<tr>
+     				<td><b>Manager's Name</b></td>
+     				<td>{{create.user.projectId[0].ProjectManager}}</td>
+     			</tr>
+     		</table>
+            <div ng-controller="DatepickerDemoCtrl" class="form-group">
+        <table class = "table borderless" >
+        	<tr>
+        		<td><b>Start Date</b></td>
+        		<td>
+        			<div class="form-horizontal">
+			          <p>
+			            <input type="text" datepicker-popup="{{format}}" ng-model="user.startDate" is-open="startOpened" min="minStartDate" max="maxStartDate" datepicker-options="dateOptions" close-text="Close" required/>
+			            <button class="btn" ng-click="openStart()"><i class="glyphicon glyphicon-calendar"></i></button>
+			          </p>
+			        </div>	
+        		</td>
+
+        		<td><b>End Date</b></td> 
+        		<td>
+        			<div class="form-horizontal">
+			          <p>
+			            <input type="text" datepicker-popup="{{format}}" ng-model="user.endDate" is-open="endOpened" min="minEndDate" max="maxEndDate" datepicker-options="dateOptions" close-text="Close" required/>
+			            <button class="btn" ng-click="openEnd()"><i class="glyphicon glyphicon-calendar"></i></button>
+			          </p>
+			        </div>
+        		</td>
+        	</tr>
+        </table>
+    </div>
+      <br>
+    	
+    	<div class="form-group" style = "margin-left: 10px;">
+    		<b style = "margin-right: 50px;">Reason</b>
+    			<input type="text"  name="leaveReason" ng-maxlength=20 ng-model="user.reason" required>
+		        <span style="color:red" ng-show="form.leaveReason.$dirty && form.leaveReason.$invalid">
+		  		     <span ng-show="form.leaveReason.$error.required">Reason is required.</span>
+		        </span>
+   		</div>					
+		<br><br><br><br>
+		<div class="form-group" style = "margin-left: 10px;">
+    		<button class="btn btn-primary" style = "margin-right: 20px;" ng-click="cancel()">CANCEL</button>
+    		<button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="submit()">SUBMIT</button>   
+    	</div>
+    </form>
+  </div>
+</div>

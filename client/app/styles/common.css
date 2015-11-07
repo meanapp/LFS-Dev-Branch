@@ -1,0 +1,13 @@
+body{
+	min-height :100% !important;
+}
+
+.submitButton{
+	width : 100%;
+	margin-top: 10px;
+}
+
+.forgotPwd{
+	float: right;
+    margin-top: 10px;
+}
