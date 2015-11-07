@@ -112,3 +112,20 @@ exports.getPendingLeaveRecordByProject = function(req, res) {
 	});
 
 }
+
+exports.cancelAndCreateLeave = function(req, res) {
+	Leave.remove({_id: req.body._id}, function(err) {
+		if(err) {
+			res.json({status: 500, error: err});
+		} else {
+			var leave = new Leave({leaveStartDate: req.body.leaveStartDate, leaveEndDate: req.body.leaveEndDate, reason: req.body.reason, status: "Pending", auditCreateDt: Date.now(), userId: req.body.userId[0]._id, projectId: req.body.projectId[0]._id});
+			leave.save(function(err1, leave) {
+				if(err1) {
+					res.json({status: 500, error: err1});
+				} else {
+					res.json({status: 200, message: 'Leave Updated'});
+				}
+			});			
+		}
+	});
+}

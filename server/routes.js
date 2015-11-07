@@ -39,4 +39,6 @@ router.get('/getPendingLeaveRecordByProject/:id', leaveController.getPendingLeav
 router.post('/updateLeaveStatus', leaveController.updateLeaveStatus);
 router.put('/cancelLeaveRecord/:id', leaveController.cancelLeaveRecord);
 router.get('/getLeaveRecordById/:id', leaveController.getLeaveRecordById);
+router.post('/cancelAndCreateLeave', leaveController.cancelAndCreateLeave);
+
 module.exports = router;

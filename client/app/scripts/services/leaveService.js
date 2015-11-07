@@ -12,7 +12,11 @@ app.factory('LeaveFactory', function($http) {
 	};
 
 	leaveFactory.getLeaveRecordById = function(recordID) {
-		return $http.get('http://localhost: 3000/getLeaveRecordById/' + recordID);
+		return $http.get('http://localhost:3000/getLeaveRecordById/' + recordID);
+	}
+	
+	leaveFactory.cancelAndCreateLeave = function(leave) {
+		return $http.post('http://localhost:3000/cancelAndCreateLeave', leave);
 	}
 
 	return leaveFactory;
