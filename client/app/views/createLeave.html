@@ -16,30 +16,30 @@
      				<td>{{create.user.projectId[0].ProjectManager}}</td>
      			</tr>
      		</table>
-            <div ng-controller="DatepickerDemoCtrl" class="form-group">
-        <table class = "table borderless" >
-        	<tr>
-        		<td><b>Start Date</b></td>
-        		<td>
-        			<div class="form-horizontal">
-			          <p>
-			            <input type="text" datepicker-popup="{{format}}" ng-model="user.startDate" is-open="startOpened" min="minStartDate" max="maxStartDate" datepicker-options="dateOptions" close-text="Close" required/>
-			            <button class="btn" ng-click="openStart()"><i class="glyphicon glyphicon-calendar"></i></button>
-			          </p>
-			        </div>	
-        		</td>
-
-        		<td><b>End Date</b></td> 
-        		<td>
-        			<div class="form-horizontal">
-			          <p>
-			            <input type="text" datepicker-popup="{{format}}" ng-model="user.endDate" is-open="endOpened" min="minEndDate" max="maxEndDate" datepicker-options="dateOptions" close-text="Close" required/>
-			            <button class="btn" ng-click="openEnd()"><i class="glyphicon glyphicon-calendar"></i></button>
-			          </p>
-			        </div>
-        		</td>
-        	</tr>
-        </table>
+        <div class="form-group">
+         <table class = "table borderless" >
+                    <tr>
+                        <td><b>Start Date</b></td>
+                        <td>
+                            <input type="date" class="form-control" datepicker-popup ng-model="startDate" is-open="startStatus.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  style="margin: 0 10px;"/>					
+                        </td>
+                        <td>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </td>
+        
+                        <td><b>End Date</b></td> 
+                        <td>
+                            <input type="date" class="form-control" datepicker-popup ng-model="endDate" is-open="endStatus.opened" min-date="minEndDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  style="margin: 0 10px;"/>			
+                        </td>			
+                        <td>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>					
+                        </td>
+                    </tr>
+                </table>
     </div>
       <br>
     	

@@ -11,21 +11,31 @@ exports.createLeave = function(req, res) {
 		} else if(!user) {
 			res.json({status: 404, message: "User not found"});
 		} else {			
-			var leave = new Leave({leaveStartDate: req.body.startDate, leaveEndDate: req.body.endDate, reason: req.body.reason, status: "Pending", auditCreateDt: Date.now(), userId: user._id, projectId: user.projectId});
-			leave.save(function(err1, leaveObj) {
+			Leave.find({$and: [{userId: user._id}, {leaveStartDate: req.body.startDate}, {leaveEndDate: req.body.endDate}, {status: 'Pending'}]}, function(err1, leave) {
 				if(err1) {
 					res.json({status: 500, error: err});
-				} else {
-					console.log("Leave Object " + leaveObj);
-					mailer.newLeaveRequestEmp(user.emailAddress,user.firstName,req.body.startDate,req.body.endDate);
-					Project.findOne({_id: user.projectId},function(err2,project){
-						if(err2||(!project)){
-							res.json({status: 404,message: "manager not found"});
-						}else{
-							mailer.newLeaveRequestMgr(project.ManagerEmailAddress,user.firstName,req.body.startDate,req.body.endDate);
+				} else if(leave.length === 0) {
+					var leave = new Leave({leaveStartDate: req.body.startDate, leaveEndDate: req.body.endDate, reason: req.body.reason, status: "Pending", auditCreateDt: Date.now(), userId: user._id, projectId: user.projectId});
+					leave.save(function(err1, leaveObj) {
+						if(err1) {
+							res.json({status: 500, error: err});
+						} else {
+							console.log("Leave created " + leaveObj.userId);
+							mailer.newLeaveRequestEmp(user.emailAddress,user.firstName,req.body.startDate,req.body.endDate);
+							Project.findOne({_id: user.projectId},function(err2,project){
+								if(err2||(!project)){
+									res.json({status: 404,message: "manager not found"});
+								}else{
+									mailer.newLeaveRequestMgr(project.ManagerEmailAddress,user.firstName,req.body.startDate,req.body.endDate);
+								}
+							});
+							res.json({status: 200, message: "Leave created"});
 						}
 					});
-					res.json({status: 200, message: "Leave created"});
+				} else {
+					console.log(leave.length);
+					console.log("Leave already exists");
+					res.json({status: 403, message: "Leave record already exists"});
 				}
 			});
 		}
@@ -126,6 +136,23 @@ exports.cancelAndCreateLeave = function(req, res) {
 					res.json({status: 200, message: 'Leave Updated'});
 				}
 			});			
+		}
+	});
+}
+
+
+function checkForDuplicate(userId, leaveStartDate, leaveEndDate) {
+	console.log("Checking for duplicates");
+	Leave.find({userId: userId, leaveStartDate: leaveStartDate, leaveEndDate: leaveEndDate, status: 'Pending'}, function(err, leave) {
+		if(err) {
+			console.log("In Error");
+			return true;
+		} else if(leave) {
+			console.log("In Leave " + leave);
+			return true;
+		} else {
+			console.log("In else");
+			return false;
 		}
 	});
 }
