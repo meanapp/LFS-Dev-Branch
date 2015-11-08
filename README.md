@@ -44,7 +44,7 @@ After setting up the project in your local, execute the below commands to start 
 
      grunt serve
   
-  Note: grunt should be installed to run the above command, to install grunt in you windows machine please click on the below to help you install it.
+  Note: grunt should be installed to run the above command, to install grunt in your windows machine please click on the below link to help you install it.
   
   http://gruntjs.com/getting-started
   
