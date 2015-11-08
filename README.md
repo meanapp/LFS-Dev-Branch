@@ -26,7 +26,7 @@ Below are steps you need to follow for checking out the project and get yourself
   
 Running tha application
 
-After setting up the project in your local, execute the below command to start yoru application.
+After setting up the project in your local, execute the below commands to start your application.
 
 1) Open a command prompt to run you local mongo databse as
 
