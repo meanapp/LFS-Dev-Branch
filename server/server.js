@@ -3,6 +3,7 @@ var	bodyParser = require('body-parser');
 var	methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var config = require('./config.js');
 
 //Create the application
  var app = express();
@@ -24,7 +25,13 @@ app.use(morgan('dev'));
 
 
 //Connect to Mongo db
- mongoose.connect('mongodb://localhost/lfsdb');
+ mongoose.connect(config.database, function(err) {
+	 if(err) {
+		 console.log("Error in connecting to database");
+	 } else {
+		 console.log("Connected to database");
+	 }
+ });
  mongoose.connection.once('open',function(){
 	
 	//Load the models

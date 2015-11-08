@@ -23,5 +23,9 @@ app.factory('DataService', function($http, $filter, UserFactory) {
         				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 			});
 	};
+	
+	dataServiceFactory.getAllUsersByProject = function(projectId) {
+		return $http.get('http://localhost:3000/getAllUsersByProject/' + projectId);
+	}
 	return dataServiceFactory;
 });

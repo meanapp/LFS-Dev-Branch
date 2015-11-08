@@ -84,7 +84,7 @@ exports.getAllUsersByProject = function(req, res) {
 		} else if(!proj) {
 			res.json({status: 404, message: "Project does not exists"});
 		} else {
-			User.find({}).populate('projectId').exec(function(err1, user) {
+			User.find({projectId: proj._id}).populate('projectId').exec(function(err1, user) {
 				if(err1) {
 					res.json({status: 500, error: err1});
 				} else if(!user) {

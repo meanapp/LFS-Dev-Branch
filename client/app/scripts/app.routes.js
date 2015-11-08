@@ -52,5 +52,9 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'views/editLeaveRecord.html',
 			controller: 'EditLeaveRecordController'
 		})
+		.when('/viewLeaveRecords', {
+			templateUrl: 'views/viewLeaveRecords.html',
+			controller: 'ViewLeaveRecordController'
+		})
 		.otherwise({ redirectTo: '/'});
 });
