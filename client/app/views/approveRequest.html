@@ -1,18 +1,18 @@
 <div class = "container" ng-controller="ApproveRequestController">
 	<h3>Pending Leave Requests</h3>
 	<br>
-	<table class="table ng-table-responsive" ng-table="tableParams">		
+	<table wt-responsive-table class="table table-hover" ng-table="tableParams">		
 		<tr ng-repeat = "leave in $data">
-			<td data-title = "'Name'" sortable="'Name'">
+			<td data-title = "'Name'" sortable="'firstName'">
 				{{leave.userId[0].firstName + " " + leave.userId[0].lastName}}
 			</td>
-			<td data-title = "'StartdDate'">
+			<td data-title = "'Start Date'" sortable="'leaveStartDate'">
 				{{leave.leaveStartDate}}
 			</td>
-			<td data-title = "'End Date'">
+			<td data-title = "'End Date'" sortable="'leaveEndDate'">
 				{{leave.leaveEndDate}}
 			</td>
-			<td data-title = "'Reason'">
+			<td data-title = "'Reason'" sortable="'reason'">
 				{{leave.reason}}
 			</td>
 			<td data-title = "'Status'">

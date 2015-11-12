@@ -2,3 +2,24 @@
   min-height: 2000px;
   padding-top: 70px;
 }
+#logoutBtn{
+	margin-top: 8px;
+	background-color: #fff;
+	color: #337ab7;
+	margin-left: 10px;
+}
+
+.navbar-default{
+	background-color: #337ab7;
+	color: #fff;
+	border-color: #2e6da4;
+}
+.navbar-default .navbar-nav>li>a ,.navbar-brand{
+	color: #fff !important;
+	
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+color: #333;
+background-color: transparent;
+}

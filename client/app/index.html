@@ -12,6 +12,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
     <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-responsive-tables/release/angular-responsive-tables.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -54,7 +55,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://getbootstrap.com/examples/navbar-fixed-top/#">LFS Leave Forecast System</a>
+          <a class="navbar-brand" href="">LFS Leave Forecast System</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -65,7 +66,7 @@
             <li ng-if = "main.loggedInEmployee" role="presentation"><a href="#/employee">View Calendar</a></li>        
             <li ng-if = "main.loggedInEmployee" role="presentation"><a href="#/createLeave">Create Leave</a></li>          
             <li ng-if = "main.loggedInEmployee" role="presentation"><a href="#/viewRecords">View Records</a></li>
-            <li><a ng-if = "main.loggedIn" class="btn btn-primary" style = "margin-left: 35px; margin-top: 2px;" ng-click = "main.doLogout()">Logout</a></li>
+            <li><button id="logoutBtn" ng-if = "main.loggedIn" class="btn btn-primary" ng-click = "main.doLogout()">Logout</button></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -120,6 +121,7 @@
     <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-responsive-tables/release/angular-responsive-tables.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
