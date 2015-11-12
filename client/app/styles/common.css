@@ -21,3 +21,21 @@ thead{
 td{
 	text-align: center;
 }
+
+/* label alignment on Create Leave Screen */
+.form-horizontal .control-label{
+	text-align: left;
+}
+
+.dateInput {
+	margin: 0 !important;
+	width: 50%;
+	float: left;
+	margin-right: 10px !important; 
+}
+
+/* Remove border */
+
+.recordsTable td{
+	border: none !important;
+}

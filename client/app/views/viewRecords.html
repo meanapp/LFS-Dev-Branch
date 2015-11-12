@@ -3,7 +3,7 @@
 	<div ng-controller = "ViewRecordsController">
 		<div class="panel panel-default" style = "width: 960px;" ng-repeat = "record in records"> 
           <div class="panel-body">
-             <table class = "table borderless">
+             <table class = "table borderless recordsTable">
                 <tr>
                   <td><b>Name</b></td>
                   <td>{{record.userId[0].firstName + " " + record.userId[0].lastName}}</td>

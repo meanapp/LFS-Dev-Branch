@@ -1,7 +1,7 @@
 <div class = "container container-fluid">	
 	<h2>Editing Exist Leave</h2>
     <br>
-	<form name="form" class="form-inline" ng-submit="submitForm(form.$valid)" novalidate>
+	<!--<form name="form" class="form-inline" ng-submit="submitForm(form.$valid)" novalidate>
     	<div class="form-group">
      		<table class = "table borderless" style = "width: 400px;">
      			<tr>
@@ -55,5 +55,56 @@
                 <a class="btn btn-primary" style = "margin-right: 20px;" href="#/viewRecords">CANCEL</a>
                 <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="submit()">SUBMIT</button>   
             </div>
-        </form>
+        </form> -->
+        
+        <form name="form" class="form-horizontal" ng-submit="submitForm(form.$valid)" novalidate>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Name</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{record.userId[0].firstName + ' ' + record.userId[0].lastName}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Project Name</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{record.projectId[0].ProjectName}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Manager's Name</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{record.projectId[0].ProjectManager}}</p>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-3 control-label">Start Date</label>
+            <div class="col-sm-9">
+                <input type="date" class="form-control dateInput" datepicker-popup ng-model="startDate" is-open="startStatus.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  style="margin: 0 10px;"/>
+                  <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">End Date</label>
+            <div class="col-sm-9">
+                 <input type="date" class="form-control dateInput" datepicker-popup ng-model="endDate" is-open="endStatus.opened" min-date="minEndDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  style="margin: 0 10px;"/>
+                <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Reason</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control dateInput" name="leaveReason" ng-maxlength=20 ng-model="record.reason" required>
+		        <span style="color:red" ng-show="form.leaveReason.$dirty && form.leaveReason.$invalid">
+                      <span ng-show="form.leaveReason.$error.required">Reason is required.</span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"></label>
+            <div class="col-sm-9">
+                <a class="btn btn-primary" style = "margin-right: 20px;" href="#/viewRecords">CANCEL</a>
+                <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="submit()">SUBMIT</button>   
+            </div>
+        </div>
+    </form>
     </div>
