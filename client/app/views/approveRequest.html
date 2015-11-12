@@ -7,10 +7,10 @@
 				{{leave.userId[0].firstName + " " + leave.userId[0].lastName}}
 			</td>
 			<td data-title = "'Start Date'" sortable="'leaveStartDate'">
-				{{leave.leaveStartDate}}
+				{{leave.leaveStartDate | date: 'dd-M-yyyy'}}
 			</td>
 			<td data-title = "'End Date'" sortable="'leaveEndDate'">
-				{{leave.leaveEndDate}}
+				{{leave.leaveEndDate | date: 'dd-M-yyyy'}}
 			</td>
 			<td data-title = "'Reason'" sortable="'reason'">
 				{{leave.reason}}

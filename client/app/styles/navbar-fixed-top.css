@@ -23,3 +23,7 @@
 color: #333;
 background-color: transparent;
 }
+
+.cal-day-weekend {
+    background: #E4F1FE;
+}
