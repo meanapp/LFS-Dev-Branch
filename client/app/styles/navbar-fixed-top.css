@@ -24,6 +24,7 @@ color: #333;
 background-color: transparent;
 }
 
-.cal-day-weekend {
-    background: #E4F1FE;
+.cal-day-weekend span[data-cal-date] {
+    color: #CF000F;
+    font-weight: bold;
 }
