@@ -20,7 +20,6 @@ exports.addUser = function(req, res) {
 						res.json({status: 500, error: err1});
 					}
 				} else {
-					mailer.registerUser(req.body.emailAddress,req.body.firstName);
 					var userLogin = new Login({userName: userObj.emailAddress, status: 'P', auditCreateDt: Date.now(), userId: userObj._id});
 					userLogin.save(function(err2, loginObj) {
 						if(err2) { 
@@ -34,6 +33,7 @@ exports.addUser = function(req, res) {
 									}
 								});																
 							} else {
+								
 									User.remove({_id: userObj._id}, function(err3) {
 									if(err3) {
 										res.json({status: 5000, error: err3});
@@ -44,6 +44,7 @@ exports.addUser = function(req, res) {
 								}); 								
 							}							
 						} else {
+							mailer.registerUser(req.body.emailAddress,req.body.firstName,userObj._id);
 							res.json({status: 200, message: "User added!!"});
 						}
 					});

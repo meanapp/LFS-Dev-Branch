@@ -23,7 +23,7 @@ app.controller('MainController', function($rootScope, $location, Auth, UserFacto
 		Auth.login(vm.loginData.email, vm.loginData.password)
 			.success(function(data) {
 				vm.processing = false;				
-				if(data.success) {
+				if(data.success) {					
 					UserFactory.setUser(data.user);
 					if(data.user.role === 'Manager') {
 						$location.path('/manager');

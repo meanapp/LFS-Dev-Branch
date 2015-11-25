@@ -55,19 +55,21 @@ exports.getLeaveRecordById = function(req, res) {
 }
 
 exports.getLeaveRecordsByUserId = function(req, res) {
+	console.log("Here");
 	Leave.find({userId: req.params.id}).populate('userId').populate('projectId').exec(function(err, leaveObj) {
 		if(err) {
 			res.json({status: 500, error: err});
 		} else if(!leaveObj) {
 			res.json({status: 404, message: "No leave record found"});
 		} else {
-			res.json({status: 200, leave: leaveObj});
+			console.log(leaveObj);
+			res.json({status: 200, leaves: leaveObj});
 		}
  	});
 };
 
 exports.getLeaveRecordByProject = function(req, res) {
-	Leave.find({projectId: req.params.id, status: {$in: ['Approve', 'Pending']}}).populate('userId').exec(function(err, leaveObj) {
+	Leave.find({projectId: req.params.id, status: {$in: ['Approve', 'Pending','Reject']}}).populate('userId').exec(function(err, leaveObj) {
 		if(err) {
 			res.json({status: 500, error: err});
 		} else if(!leaveObj) {

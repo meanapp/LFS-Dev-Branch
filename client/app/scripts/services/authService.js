@@ -10,7 +10,7 @@ app.factory('Auth', function($http, $q, AuthToken) {
 		return $http.post('http://localhost:3000/login', {
 			email: email,
 			password: password
-		}).success(function(data) {
+		}).success(function(data) {			
 			if(data.success) {					
 				AuthToken.setToken(data.token);
 				AuthToken.setRole(data.user.role);	

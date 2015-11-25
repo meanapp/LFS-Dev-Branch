@@ -7,9 +7,11 @@ app.controller('ViewRecordsController', function($scope, $route, RecordsFactory,
 	var vm = this;
 	vm.user = JSON.parse(UserFactory.getUser());
 
+	console.log(vm.user._id);
 	RecordsFactory.getEmployeeRecords(vm.user._id)
 		.success(function(data) {
-			$scope.records = data.leave;			
+			$scope.records = data.leave;	
+			console.log(data.leave);	
 		}).error(function(data) {
 			$scope.records = 'No records found';
 		});

@@ -9,4 +9,18 @@ myApp.controller('ViewLeaveRecordController', ['$scope', '$http', '$filter', 'Da
 		.success(function(response) {
 			$scope.users = response.users;
 		});	
+		
+	$scope.leaves = {}	
+		
+	$scope.showUserLeave = function(id) {
+		$http.get('http://localhost:3000/getLeaveRecordsByUserId/' + id)
+			.success(function(response) {
+				if(response.status === 200) {
+					$scope.leaves = response.leaves;
+				}
+			})
+			.error(function(response) {
+				console.log("Error");
+			})
+	}
 }]);

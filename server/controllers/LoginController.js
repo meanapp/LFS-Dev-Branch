@@ -1,5 +1,6 @@
 var Login = require('../models/LoginModel.js');
 var User = require('../models/UserModel.js');
+var Leave = require('../models/LeaveModel.js');
 var genToken = require('../middleware/generateToken.js');
 var mailer= require('../mailer.js');
 
@@ -15,7 +16,19 @@ exports.login = function(req, res) {
 					} else if(!userObj) {
 						res.json({status: 404, message: "User not found!"});
 					} else {
-						res.json(genToken(userObj));
+						if(userObj.role === "Manager") {
+							Leave.count({status: 'Pending'}, function(err, count) {
+								if(err) {
+									console.log("Error: " + err);
+								} else {
+									userObj["count"] = count;
+									console.log("Count " + userObj.count);
+									res.json(genToken(userObj));
+								}								
+							});
+						} else {
+							res.json(genToken(userObj));
+						}						
 					}
 				});
 			} else {
