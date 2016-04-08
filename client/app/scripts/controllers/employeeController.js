@@ -2,6 +2,7 @@
 
 var app = angular.module('empCtrl', []);
 
+
 app.controller('EmployeeController', function($scope, CalendarFactory, UserFactory) {
 	
 	var vm = this;	
@@ -13,12 +14,12 @@ app.controller('EmployeeController', function($scope, CalendarFactory, UserFacto
 		.success(function(data) {
 			$scope.events = [];
 			for(var i = 0; i < data.leave.length; i++) {
-
+					var end = moment(data.leave[i].leaveEndDate).add(1, 'days').calendar();
 					var eventObj = {	
 			 			title: data.leave[i].userId[0].firstName + " " + data.leave[i].userId[0].lastName,
 			 			type: checkLeaveStatus(data.leave[i].status),
 			 			startsAt: new Date(data.leave[i].leaveStartDate), 
-		    			endsAt: new Date(data.leave[i].leaveEndDate),
+		    			endsAt: new Date(end),
 				    	resizable: true,
 				    	incrementsBadgeTotal: true, 
 				    	recursOn: 'year', 

@@ -42,3 +42,7 @@ background-color: transparent;
 	width: 100px;
 	margin: 0px;
 }
+
+.modal-content {
+	height: 120px;
+}

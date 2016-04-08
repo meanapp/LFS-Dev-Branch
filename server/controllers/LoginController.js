@@ -8,7 +8,10 @@ exports.login = function(req, res) {
 	Login.findOne({userName: req.body.email}, function(err, user) {
 		if(err) {
 			res.json({status: 500, error: err});
-		} else {
+		} else if(!user) {
+			res.json({status: 404, message: 'User not found'});
+		} else {	
+		console.log(user);
 			if(user.password === req.body.password && user.status === 'A') {
 				User.findOne({_id: user.userId}).populate('projectId').exec(function(err1, userObj) {
 					if(err1) {
@@ -32,7 +35,7 @@ exports.login = function(req, res) {
 					}
 				});
 			} else {
-				res.json({status: 401, message: "Invalid credetials"});
+				res.json({status: 401, message: "Invalid credentials"});
 			}
 		}
 	});
@@ -50,7 +53,7 @@ exports.updatePassword = function(req, res) {
 };
 
 exports.changePassword = function(req, res) {
-	Login.findOneAndUpdate({_id: req.body.id}, {password: req.body.password}, function(err) {
+	Login.findOneAndUpdate({_id: req.body.id}, {password: req.body.password,  status: "A"}, function(err) {
 		if(err) {
 			res.json({status: 500, error: err});
 		} else {

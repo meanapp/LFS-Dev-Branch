@@ -1,6 +1,6 @@
 <div class = "container">
 <h1> Registration Page </h1>
-	<div ng-app="register" ng-controller="CreateEmployeeController">
+	<div ng-controller="CreateEmployeeController">
 		<div class="container">
 			<div class="row">  
 					<div class="col-sm-6">
@@ -40,10 +40,12 @@
 							</div>
 							<br>
 
-							<button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">Submit</button>							
+							<button class="btn btn-primary" ng-disabled="registerForm.$invalid" ng-click="submit()">Submit</button>							
 						</form>
 					</div>	
-				</div>
+				</div>					
+				<modal title="Employee added successfully!" visible="showModalSuccess"></modal>
+	    		<modal title="Error in creating user, please contact the admin" visible="showModalError"></modal>
 			</div>
 		</div>
 </div>

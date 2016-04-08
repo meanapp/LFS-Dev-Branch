@@ -2,9 +2,10 @@
 
 var app = angular.module('approvalRequestCtrl', []);
 
-app.controller('ApproveRequestController', function($scope, $route, $http, ngTableParams, $window, DataService) {
+app.controller('ApproveRequestController', function($rootScope, $scope, $route, $http, ngTableParams, $window, DataService) {
 
 	var vm = this;
+	$scope.records = DataService.data;
 	var data = DataService.data;
 
 	$scope.tableParams = new ngTableParams({

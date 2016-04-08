@@ -3,13 +3,13 @@ var mailer= require('../mailer.js');
 var user = require('../models/UserModel.js');
 
 exports.addProject = function(req, res) {
-	user.findOne({emailAddress: req.body.emailAddress}, function(err, user1) {
+	/*user.findOne({emailAddress: req.body.emailAddress}, function(err, user1) {
 		
 		if(err) {
 			res.json({status: 500, error: err});
 		} /*else if(!user1) {
 			res.json({status: 404, message: "User does not exists"});
-		} */else {
+		} else {*/
 					var project = new Project({ProjectManager: req.body.projectManager, ManagerEmailAddress: req.body.emailAddress, ProjectName: req.body.projectName});
 					project.save(function(err) {
 					if(err) {
@@ -23,8 +23,8 @@ exports.addProject = function(req, res) {
 							
 					}
 				});
-		}			
-	});	
+/*		}			
+	});	*/
 };
 
 exports.getProjects = function(req, res) {

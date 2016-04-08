@@ -2,7 +2,7 @@
 
 var app = angular.module('mainCtrl', []);
 
-app.controller('MainController', function($rootScope, $location, Auth, UserFactory) {
+app.controller('MainController', function($rootScope, $location, $http, Auth, UserFactory, AuthToken, DataService) {
 
 	var vm = this;
 
@@ -10,6 +10,13 @@ app.controller('MainController', function($rootScope, $location, Auth, UserFacto
 	vm.loggedInEmployee = Auth.isLoggedInEmployee();
 	vm.loggedInManager = Auth.isLoggedInManager();
 
+	/*DataService.getPendingCount().success(function(response) {		
+		if(response) {
+			vm.count = response.record.length;
+		}		
+	}); */
+
+	
 	$rootScope.$on('$routeChangeStart', function() {
 		vm.loggedIn = Auth.isLoggedIn();			
 		vm.loggedInEmployee = Auth.isLoggedInEmployee();
@@ -19,23 +26,24 @@ app.controller('MainController', function($rootScope, $location, Auth, UserFacto
 	vm.doLogin = function() {
 		vm.processing = true;
 		vm.error = '';
-
-		Auth.login(vm.loginData.email, vm.loginData.password)
-			.success(function(data) {
-				vm.processing = false;				
-				if(data.success) {					
-					UserFactory.setUser(data.user);
-					if(data.user.role === 'Manager') {
-						$location.path('/manager');
-					} else {
-						$location.path('/employee');
-					}
-				} else if(data.status === 401) {
-					alert(data.message);
+				
+		$http.post('http://localhost:3000/login', {
+			email: vm.loginData.email,
+			password: vm.loginData.password
+		}).success(function(response) {
+			if(response.success) {					
+				UserFactory.setUser(response.user);
+				AuthToken.setToken(response.token);
+				AuthToken.setRole(response.user.role);	
+				if(response.user.role === 'Manager') {
+					$location.path('/manager');
 				} else {
-					vm.error = data;
+					$location.path('/employee');
 				}
-			});
+			} else {
+				vm.error = response.message;
+			}
+		});
 	};
 
 	vm.doLogout = function() {

@@ -13,11 +13,12 @@ app.controller('ManagerController', function($scope, CalendarFactory, UserFactor
 		.success(function(data) {
 			$scope.events = [];
 			for(var i = 0; i < data.leave.length; i++) {
+					var end = moment(data.leave[i].leaveEndDate).add(1, 'days').calendar();
 					var eventObj = {	
 			 			title: data.leave[i].userId[0].firstName + " " + data.leave[i].userId[0].lastName,
 			 			type: typeArray[i],
 			 			startsAt: new Date(data.leave[i].leaveStartDate), 
-		    			endsAt: new Date(data.leave[i].leaveEndDate),
+		    			endsAt: new Date(end),
 				    	resizable: true,
 				    	incrementsBadgeTotal: true, 
 				    	recursOn: 'year', 

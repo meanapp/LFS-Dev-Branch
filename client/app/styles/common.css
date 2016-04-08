@@ -39,3 +39,23 @@ td{
 .recordsTable td{
 	border: none !important;
 }
+
+
+/* modal Css */
+
+.modal-dialog{
+	width: 450px;
+	top: 20px;
+}
+
+.modal-content{
+	height: 100px;
+	padding: 10px;
+}
+.modal-body h4{
+	float: left;
+}
+.modal-btn {
+	width: 15% !important;
+	float: right;
+}

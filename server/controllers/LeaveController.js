@@ -17,6 +17,8 @@ exports.createLeave = function(req, res) {
 				} else if(leave.length === 0) {
 					var leave = new Leave({leaveStartDate: req.body.startDate, leaveEndDate: req.body.endDate, reason: req.body.reason, status: "Pending", auditCreateDt: Date.now(), userId: user._id, projectId: user.projectId});
 					leave.save(function(err1, leaveObj) {
+						console.log("leave applied--> ");
+							console.log(req.body.id+" "+req.body.startDate +" "+req.body.endDate);
 						if(err1) {
 							res.json({status: 500, error: err});
 						} else {
@@ -55,14 +57,12 @@ exports.getLeaveRecordById = function(req, res) {
 }
 
 exports.getLeaveRecordsByUserId = function(req, res) {
-	console.log("Here");
-	Leave.find({userId: req.params.id}).populate('userId').populate('projectId').exec(function(err, leaveObj) {
+	Leave.find({userId: req.params.id, status: {$in: ['Approve', 'Pending']}}).populate('userId').populate('projectId').exec(function(err, leaveObj) {
 		if(err) {
 			res.json({status: 500, error: err});
 		} else if(!leaveObj) {
 			res.json({status: 404, message: "No leave record found"});
 		} else {
-			console.log(leaveObj);
 			res.json({status: 200, leaves: leaveObj});
 		}
  	});

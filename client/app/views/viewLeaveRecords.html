@@ -1,8 +1,8 @@
 <div class = "container">
-	<h2>View Leave Records By Employee</h2>
+	<h4>View Leave Records By Employee</h4>
 	<div class = "row">
 		<div class = "col-md-9">
-			<div class="well well-sm">
+			<!-- <div class="well well-sm">
 				<h4>Search Criteria</h4>
 				<br>	
 				<div class="form-group">
@@ -11,41 +11,41 @@
 					
 					<label class="control-label">To</label>
 					<input type="date" class="" datepicker-popup ng-model="startDate" is-open="startStatus.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  style="margin: 0 10px;"/>  <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-					<button class = "btn btn-primary" style = "margin-left: 10px;">Filter</button>
-					<br><br>
-					<label class="control-label">Status</label>
-					<select class = "">
-						<option value = "-1">Select</option>
-						<option value = "approved">Approved</option>
-						<option value = "pending">Pending</option>
-						<option value = "rejected">Rejected</option>
-						<option value = "cancelled">Cancelled</option>	
-					</select>					           
+					<button class = "btn btn-primary" style = "margin-left: 10px;">Filter</button>					
 				</div>		
+			</div> -->
+			<br>			
+			<div class = "row">
+				<div class = "col-md-6">
+					<input type="text" class="form-control" placeholder="Filter on Full Name, Email, Status" ng-model = "search">
+				</div>
+				<div class = "col-md-6">
+					<label class="control-label col-md-2">Status</label>
+					<div class = "col-md-4">
+						<select class = "form-control" ng-model= "selectedStatus" ng-options = "status.id as status.name for status in statuses track by status.id" ng-change = "updateStatus()"></select>							
+					</div>					
+				</div>
 			</div>
 			<br>
-			<table class = "table table-hover" ng-table="tableParams">
-				<thead>
-					<tr>
-						<td>Full Name</td>						
-						<td>Email Address</td>
-						<td>Start Date</td>
-						<td>End Date</td>
-						<td>Reason</td>
-						<td>Status</td>
-					</tr>
-				</thead>	
-				<tbody>
-					<tr ng-repeat = "leave in leaves">
-						<td>{{leave.userId[0].firstName + ' ' + leave.userId[0].lastName}}</td>
-						<td>{{leave.userId[0].emailAddress}}</td>	
-						<td>{{leave.leaveStartDate | date: 'dd-M-yyyy'}}</td>
-						<td>{{leave.leaveEndDate | date: 'dd-M-yyyy'}}</td>
-						<td>{{leave.reason}}</td>
-						<td>{{leave.status}}</td>					
-					</tr>
-				</tbody>							
-			</table>				
+			<table wt-responsive-table class="table table-hover" ng-table="tableParams">
+				<tr ng-repeat = "leave in $data | filter:search">
+					<td data-title = "'Name'" sortable="'firstName'">
+						{{leave.userId[0].firstName + " " + leave.userId[0].lastName}}
+					</td>
+					<td data-title = "'Start Date'" sortable="'leaveStartDate'">
+						{{leave.leaveStartDate | date: 'dd-M-yyyy'}}
+					</td>
+					<td data-title = "'End Date'" sortable="'leaveEndDate'">
+						{{leave.leaveEndDate | date: 'dd-M-yyyy'}}
+					</td>
+					<td data-title = "'Reason'" sortable="'reason'">
+						{{leave.reason}}
+					</td>
+					<td data-title = "'Status'">
+						{{leave.status}}
+					</td>
+				</tr>
+			</table>		
 		</div>
 		<div class = "col-md-3">
 			<h3>{{projectName}}</h3>

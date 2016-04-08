@@ -12,22 +12,29 @@ app.controller('CreateEmployeeController', function($scope, $route, ManagerFacto
 			$scope.projects = data.project;
 		});
 
+	$scope.showModalSuccess = false;
+    $scope.showModalError = false;
+    $scope.message = "";
+    $scope.status = "";
 
 	$scope.submitForm = function() {
 		if ($scope.registerForm.$valid) {
 			ManagerFactory.addEmployee(angular.toJson($scope.user))
 				.success(function(data) {
 					console.log(data);
-						if(data.status==500){
-							console.log(data.error);
-							alert(data.message);
-						}else{
-					alert('User created successfully!!');
+					if(data.status==500){
+						$scope.showModalError = !$scope.showModalError;
+          				$scope.status = "error";
+          				$scope.message = data.message;
+					} else{
+						$scope.showModalSuccess = !$scope.showModalSuccess;           
+          				$scope.status = "success";
+						$route.reload();
 				}
-					$route.reload();
-				})
-				.error(function(data) {
-					alert('Error use creating employee');
+			}).error(function(data) {
+					$scope.showModalError = !$scope.showModalError;
+          			$scope.status = "error";
+          			$scope.message = data.message;
 				});
 		}
 	};

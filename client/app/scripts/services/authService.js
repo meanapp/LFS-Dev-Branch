@@ -6,19 +6,6 @@ app.factory('Auth', function($http, $q, AuthToken) {
 
 	var authFactory = {};
 
-	authFactory.login = function(email, password) {
-		return $http.post('http://localhost:3000/login', {
-			email: email,
-			password: password
-		}).success(function(data) {			
-			if(data.success) {					
-				AuthToken.setToken(data.token);
-				AuthToken.setRole(data.user.role);	
-			}
-			return data;
-		});
-	};
-
 	authFactory.logout = function() {
 		AuthToken.setToken();
 		AuthToken.setRole();

@@ -11,9 +11,10 @@ exports.addUser = function(req, res) {
 			res.json({status: 404, message: "Project does not exists!!"});
 		} else {
 			var user = new User({emailAddress: req.body.emailAddress, role: 'Employee', firstName: req.body.firstName, lastName: req.body.lastName, auditCreateDt: Date.now(), projectId: proj._id});
-			user.save(function(err1, userObj) {
+			user.save(function(err1, userObj) {				
 				if(err1) {
 					if(err1.code === 11000) {
+						console.log("error" + err1);
 						res.json({status: 500, message: "User already exists"});
 					} else {
 						console.log("error " + err1)
@@ -146,10 +147,13 @@ exports.addProjectToManager = function(req, res) {
 exports.getUserDetails = function(req, res) {
 	Login.findOne({userId: req.params.id}, function(err, user) {
 		if(err) {
+			console.log(user);
 			res.json({status: 500, message: 'Error'});
 		} else if(!user) {
+			console.log(user);
 			res.json({status: 404, message: 'User not found'});
 		} else {
+			console.log(user);
 			res.json({status: 200, user: user});
 		}
 	})

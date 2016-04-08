@@ -1,6 +1,9 @@
 <div class = "container" ng-controller="ApproveRequestController">
 	<h3>Pending Leave Requests</h3>
 	<br>
+	<div class = "alert alert-warning" ng-if = "records.length === 0">
+        <h3>No Leave records to display</h3>
+    </div>
 	<table wt-responsive-table class="table table-hover" ng-table="tableParams">		
 		<tr ng-repeat = "leave in $data">
 			<td data-title = "'Name'" sortable="'firstName'">

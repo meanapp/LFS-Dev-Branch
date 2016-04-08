@@ -1,6 +1,9 @@
 <div class="container">
     <div ng-app="login" ng-controller="MainController as login">
       <div class="container">
+        <div class = "alert alert-danger fade in" ng-if="login.error">
+            {{login.error}}
+        </div>
         <div class="row">  
           <div class="col-sm-6">
             <form name="loginForm" ng-submit = "login.doLogin()" novalidate>

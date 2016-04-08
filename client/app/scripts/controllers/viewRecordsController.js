@@ -7,25 +7,70 @@ app.controller('ViewRecordsController', function($scope, $route, RecordsFactory,
 	var vm = this;
 	vm.user = JSON.parse(UserFactory.getUser());
 
-	console.log(vm.user._id);
 	RecordsFactory.getEmployeeRecords(vm.user._id)
 		.success(function(data) {
-			$scope.records = data.leave;	
-			console.log(data.leave);	
+			$scope.records = data.leaves;					      
 		}).error(function(data) {
 			$scope.records = 'No records found';
 		});
 
 
+	  $scope.showModalSuccess = false;
+    $scope.showModalError = false;
+
 	$scope.cancel = function(leaveID) {
-		console.log('Clickeed');
 		RecordsFactory.cancelLeave(leaveID)
 			.success(function(data) {
-				alert('Your leave is cancelled');
-				$route.reload();
+        	console.log('Clickeed');
+				$scope.showModalSuccess = !$scope.showModalSuccess;    
 			})
 			.error(function(data) {
-				alert('Error is cancelling leave record');
+        	console.log('Clickeed');
+				$scope.showModalError = !$scope.showModalError;
 			});
 	};
 });
+
+app.directive('modalCancel', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' +  
+              '<div class="modal-body" style="text-align: center;"><h4>{{title}}</h4> <button class = "btn btn-primary modal-btn" ng-click="ok()">Ok</button></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+        scope.title = attrs.title;
+        
+        scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+                
+      }, controller: ['$scope', '$route', function($scope, $route) {
+          $scope.ok = function() {      
+            $(".modal-backdrop").hide();            
+            $route.reload();            
+            $route.reload();               
+          }
+      }]
+    };
+  });
